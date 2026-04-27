@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrera konto</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 50px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Skapa nytt konto</h2>
+
+<form th:action="@{/register}" th:object="${user}" method="post">
+    <div class="form-group">
+        <label>Användarnamn:</label>
+        <input type="text" th:field="*{username}" required/>
+    </div>
+
+    <div class="form-group">
+        <label>Lösenord:</label>
+        <input type="password" th:field="*{password}" required/>
+    </div>
+
+    <div class="form-group checkbox-group">
+        <input type="checkbox" th:field="*{mfaEnabled}" id="mfa"/>
+        <label for="mfa">Aktivera Authenticator-app (MFA)</label>
+    </div>
+
+    <button type="submit">Registrera mig</button>
+</form>
+
+<p>Har du redan ett konto? <a th:href="@{/login}">Logga in här</a></p>
+</body>
+</html>

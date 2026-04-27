@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Startsida</title>
+</head>
+<body>
+<h1>Välkommen in, <span th:text="${username}">Användare</span>!</h1>
+
+<div th:if="${mfaActive}">
+    <strong>Säker inloggning:</strong> Du är nu säkert inloggad med tvåfaktorsautentisering.
+</div>
+
+<div th:unless="${mfaActive}">
+    Du är inloggad med vanligt lösernord utan MFA.
+</div>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logga ut</button>
+</form>
+</body>
+</html>

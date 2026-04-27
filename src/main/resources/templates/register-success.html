@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MFA Aktiverat</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .qr-container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: fit-content;
+        }
+
+        .secret-box {
+            background: #f4f4f4;
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<h2>Viktigt: Konfigurera din Authenticator-app</h2>
+<p>Skanna QR-koden nedan med Google Authenticator eller Microsoft Authenticator.</p>
+
+<div class="qr-container">
+    <img th:src="${qrCode}" alt="QR Code"/>
+</div>
+
+<p>Om du inte kan skanna koden, mata in den manuellt:</p>
+<p class="secret-box"><strong th:text="${secret}"></strong></p>
+
+<hr>
+<p>När du har lagt till kontot i appen kan du gå vidare till inloggningen.</p>
+<a th:href="@{/login}">Gå till inloggningssidan</a>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<form th:action="@{/login/2fa}" method="post">
+    <label>Ange koden från din Authenticator-app:</label>
+    <input type="text" name="code" required autofocus/>
+    <button type="submit">Verifiera</button>
+</form>
+
+<p th:if="${param.error}" style="color:red">Fel kod, försök igen!</p>
