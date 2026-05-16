@@ -1,5 +1,6 @@
 package se.iths.jakob.microsoftauthenticator.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +18,17 @@ public class HomeController {
     private UserRepository userRepository;
 
     @GetMapping("/home")
-    public String showHome(Principal principal, Model model) {
+    public String showHome(Principal principal, Model model, HttpSession session) {
+
+        if (principal == null) {
+            return "redirect:/login";
+
+        }
+        if (!Boolean.TRUE.equals(session.getAttribute("mfaVerified"))) {
+            return "redirect:/mfa-check";
+        }
 
         String username = principal.getName();
-
         AppUser user = userRepository.findByUsername(username);
 
         model.addAttribute("username", username);
